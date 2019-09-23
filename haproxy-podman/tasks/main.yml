@@ -1,0 +1,14 @@
+---
+# tasks file for haproxy-podman
+- name: install haproxy systemd unit file
+  template: src=../templates/haproxy-container.service.j2 dest=/etc/systemd/system/haproxy-container.service
+
+- name: install haproxy config
+  template: src=../templates/haproxy-container.conf.j2 dest=/etc/haproxy-container.conf
+
+- name: start myservice
+  systemd: state=started name=haproxy-container daemon_reload=yes
+
+#- name: check syntax haproxy apiVersion
+#  shell: |
+#    podman run -it --rm -v /etc/haproxy-container.conf:/usr/local/etc/haproxy --name haproxy-syntax-check haproxy:2.0 haproxy -c -f /usr/local/etc/haproxy:
