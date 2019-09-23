@@ -1,13 +1,27 @@
 ---
 # tasks file for haproxy-podman
 - name: install haproxy systemd unit file
-  template: src=../templates/haproxy-container.service.j2 dest=/etc/systemd/system/haproxy-container.service
+  template:
+    src: ../templates/haproxy-container.service.j2
+    dest: /etc/systemd/system/haproxy-container.service
+  notify:
+    - systemd enable reload
+  tags: haproxy
 
 - name: install haproxy config
-  template: src=../templates/haproxy-container.conf.j2 dest=/etc/haproxy-container.conf
+  template:
+    src: ../templates/haproxy-container.conf.j2
+    dest: /etc/haproxy-container.conf
+  notify:
+    - restart haproxy
+  tags: haproxy
 
-- name: start myservice
-  systemd: state=started name=haproxy-container daemon_reload=yes
+#- name: systemd haproxy enabled
+#  systemd:
+#    name: haproxy-container 
+#    state: started
+#    enabled: yes
+#  tags: haproxy
 
 #- name: check syntax haproxy apiVersion
 #  shell: |

@@ -7,3 +7,4 @@ ExecStart=/usr/bin/podman start -a haproxy:2.0 -v /etc/haproxy-container.conf:/u
 ExecStop=/usr/bin/podman stop -t 10 haproxy:2.0
 [Install]
 WantedBy=multi-user.target
+#

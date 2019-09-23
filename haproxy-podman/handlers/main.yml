@@ -1,2 +1,14 @@
 ---
 # handlers file for haproxy-podman
+- name: restart haproxy
+  systemd:
+    name: haproxy-container 
+    state: restarted
+  tags: haproxy
+
+- name: systemd enable reload
+  systemd:
+    state: started
+    name: haproxy-container
+    daemon_reload: yes
+    enabled: yes
