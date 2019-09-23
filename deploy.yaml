@@ -4,7 +4,5 @@
     http_port: 80
     max_clients: 200
   remote_user: root
-  tasks:
-  - import_tasks: main.yml 
-  handlers:
-  - include: ../handlers/main.yml
+  roles:
+    - { role: haproxy-podman }

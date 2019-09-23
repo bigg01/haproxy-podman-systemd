@@ -6,4 +6,5 @@
 ansible-galaxy init --offline haproxy-podman
 
 # install 
-ansible-playbook   tasks/deploy.yaml --check
+ansible-playbook deploy.yaml --check
+ansible-playbook deploy.yaml 
